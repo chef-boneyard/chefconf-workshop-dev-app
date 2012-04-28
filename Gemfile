@@ -11,6 +11,8 @@ gem 'json'
 # Padrino Stable Gem
 gem 'padrino', '0.10.6'
 
+gem 'rspec' # the padrino CLI requires the rspec tasks >_<
+
 group :mysql do
   gem "mysql2", "~> 0.3.11"
 end
@@ -25,11 +27,10 @@ group :development do
 end
 
 group :production do
-  gem "unicorn", "~> 4.3.0"
+  gem 'unicorn', '~> 4.3.0'
 end
 
 group :test do
-  gem 'rspec'
   gem 'rack-test'
   gem 'sqlite3'
 end
