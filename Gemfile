@@ -1,10 +1,17 @@
 source :rubygems
 
-gem "rack", "~> 1.4.1"
-gem "sinatra", "~> 1.3.2"
-gem "sequel", "~> 3.34.1"
-gem "sinatra-sequel", "~> 0.9.0"
-gem "json", "~> 1.7.0"
+# Project requirements
+gem 'rake'
+gem 'sinatra-flash', :require => 'sinatra/flash'
+
+# Component requirements
+gem 'sequel'
+gem 'json'
+
+# Padrino Stable Gem
+gem 'padrino', '0.10.6'
+
+gem 'rspec' # the padrino CLI requires the rspec tasks >_<
 
 group :mysql do
   gem "mysql2", "~> 0.3.11"
@@ -20,10 +27,10 @@ group :development do
 end
 
 group :production do
-  gem "unicorn", "~> 4.3.0"
+  gem 'unicorn', '~> 4.3.0'
 end
 
 group :test do
-  gem 'rspec'
-  gem 'rack-test', require: 'rack/test'
+  gem 'rack-test'
+  gem 'sqlite3'
 end

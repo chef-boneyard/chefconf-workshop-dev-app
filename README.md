@@ -1,18 +1,18 @@
-## chefconf-workshop-dev-app
+# chefconf-workshop-dev-app
 
 This is a simple REST server for use in Opscode's Developer Training classes.
 
-TODO: More detail here later
-
 ## Install
 
-    gem install bundler
-    bundle install
+    bundle install --binstubs
+    # kick bundle exec to the curb
+    export PATH=.:$PATH
 
-## Run
+## Run Tests:
 
-    rackup
+    padrino rake sq:migrate:up -e test
+    padrino rake spec
 
-## Test
+## Run the App
 
-    rspec
+    padrino start

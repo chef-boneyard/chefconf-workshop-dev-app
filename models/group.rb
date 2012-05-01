@@ -1,8 +1,8 @@
-require 'sequel'
-
 class Group < Sequel::Model
+
   plugin :validation_helpers
   many_to_many :users
+
   def validate
     super
     validates_unique [:name]
@@ -18,4 +18,5 @@ class Group < Sequel::Model
       "users" => userids
     }.to_json
   end
+
 end
