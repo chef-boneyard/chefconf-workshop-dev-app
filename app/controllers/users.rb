@@ -1,10 +1,10 @@
-ChefconfWorkshopDevApp.controllers do
+ChefconfWorkshopDevApp.controllers :users do
 
   before do
     headers "content-type" => "application/json"
   end
 
-  get '/users/:userid' do |userid|
+  get '/:userid' do |userid|
     user = User.first(:userid => userid)
     if user
       status 200
@@ -15,25 +15,29 @@ ChefconfWorkshopDevApp.controllers do
     end
   end
 
-  post '/users/' do
+  post '/' do
     data = JSON.parse request.body.read
     create_or_update_user data
   end
 
-  delete '/users/:userid' do |userid|
+  delete '/:userid' do |userid|
     user = User.first(:userid => userid)
 
     if user
+      # We want to return the entire user JSON as it was when it was
+      # deleted.  To do this, we need to stash it aside before we delete
+      # it, because otherwise we won't get the group names back
+      json = user.to_json
       User.filter(:userid => userid).delete
       status 200
-      user.to_json
+      json
     else
       status 404
       {"error" => "User '#{userid}' not found"}.to_json
     end
   end
 
-  put '/users/:userid' do |userid|
+  put '/:userid' do |userid|
     data = JSON.parse request.body.read
 
     if userid != data["userid"]
